@@ -1,0 +1,7 @@
+#!/bin/sh
+
+SERVER=206.189.186.156
+
+ssh root@$SERVER "cd nerdarbitrage.com && git pull && ./build-back
+
+notify-send 'Nerdarbitrage.com' 'Application has successfully been deployed' --icon=dialog-information
