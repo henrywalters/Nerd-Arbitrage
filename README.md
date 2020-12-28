@@ -48,8 +48,8 @@ Copy and paste the following into the env file:
 DB_TYPE=mysql
 DB_HOST=localhost
 DB_PORT=3306
-DB_USER=[username]
-DB_PASS=[password]
+DB_USER=[username] # Replace me with the proper username
+DB_PASS=[password] # Replace me with the proper password
 DB_NAME=nerd-arbitrage
 
 APP_PORT=4200
