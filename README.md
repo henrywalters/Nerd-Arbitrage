@@ -12,14 +12,15 @@ To run the app locally, you will need 2 requirements. Here are some basic instal
     -  `$ nvm install 14` - install Node version 14
     -  `$ nvm use 14` - use Node version 14
 - MySQL - install this through the command line
-  - `$ sudo apt-get install mysql-server` - install MySQL
+  - `$ sudo apt-get update` - update your system
+  - `$ sudo apt-get install mysql-server mysql-client` - install MySQL
   - `$ sudo su` - change to the root user, this will prevent MySQL from screaming at you.
-  - `$ sudo mysql_secure_installation` - go through the form however you'd like, doesn't really matter.
+  - `$ mysql_secure_installation` - go through the form however you'd like, doesn't really matter.
   - Next, you will want to create a database for Nerd Arbitrage and a user to access it.
   - `$ mysql` - open up a mysql client in the shell
-  - `mysql> CREATE DATABASE nerd-arbitrage;` - create a new database. Note: nerd-arbitrage can be whatever you want.
+  - `mysql> CREATE DATABASE nerd_arbitrage;` - create a new database. Note: nerd-arbitrage can be whatever you want.
   - `mysql> CREATE USER '[username]'@'localhost' IDENTIFIED WITH mysql_native_password BY '[password]';` - create a new user. Replace [username], [password] with the desired username and password.
-  - `mysql> GRANT ALL PRIVILEGES ON nerd-arbitrage.* to '[username]'@'localhost';` - grant all privileges for nerd-arbitrage database to the new user.
+  - `mysql> GRANT ALL PRIVILEGES ON nerd_arbitrage.* to '[username]'@'localhost';` - grant all privileges for nerd-arbitrage database to the new user.
   - `mysql> FLUSH PRIVILEGES;` - make the privileges take affect.
   - `mysql> exit; ` - exit the mysql client
   - `$ exit` - exit the sudo user
