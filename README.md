@@ -1,75 +1,74 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Nerd Arbitrage
+A piece of software to scrape several market places for comic books and identify arbitrage opportunities.
 
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Getting Started
 
-## Description
+## Requirements
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+To run the app locally, you will need 2 requirements. Here are some basic install instructions. 
 
-## Installation
+- Node v14 & NPM - best way to install this is using [NVM](git@github.com:henrywalters/Nerd-Arbitrage.git).
+    -  `$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash` - install NVM using the installer script
+    -  `$ nvm install 14` - install Node version 14
+    -  `$ nvm use 14` - use Node version 14
+- MySQL - install this through the command line
+  - `$ sudo apt-get install mysql-server` - install MySQL
+  - `$ sudo su` - change to the root user, this will prevent MySQL from screaming at you.
+  - `$ sudo mysql_secure_installation` - go through the form however you'd like, doesn't really matter.
+  - Next, you will want to create a database for Nerd Arbitrage and a user to access it.
+  - `$ mysql` - open up a mysql client in the shell
+  - `mysql> CREATE DATABASE nerd-arbitrage;` - create a new database. Note: nerd-arbitrage can be whatever you want.
+  - `mysql> CREATE USER '[username]'@'localhost' IDENTIFIED WITH mysql_native_password BY '[password]';` - create a new user. Replace [username], [password] with the desired username and password.
+  - `mysql> GRANT ALL PRIVILEGES ON nerd-arbitrage.* to '[username]'@'localhost';` - grant all privileges for nerd-arbitrage database to the new user.
+  - `mysql> FLUSH PRIVILEGES;` - make the privileges take affect.
+  - `mysql> exit; ` - exit the mysql client
+  - `$ exit` - exit the sudo user
 
-```bash
-$ npm install
+## Installing the App
+
+First, begin by cloning the repository
+
+`$ git clone https://github.com/henrywalters/Nerd-Arbitrage.git`
+
+Next, change into that directory
+
+`$ cd Nerd-Arbitrage`
+
+Install the required npm packages
+
+`$ npm install`
+
+You will need to create an .env file to specify app secrets and connection details
+
+`$ nano .env`
+
+Copy and paste the following into the env file:
+
+```
+DB_TYPE=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=[username]
+DB_PASS=[password]
+DB_NAME=nerd-arbitrage
+
+APP_PORT=4200
 ```
 
-## Running the app
+Finally, run the database migrations to create the tables for the app
 
-```bash
-# development
-$ npm run start
+`$ npm run typeorm -- migration:run`
 
-# watch mode
-$ npm run start:dev
 
-# production mode
-$ npm run start:prod
-```
+## Running the App
 
-## Test
+To run the app, simply run:
 
-```bash
-# unit tests
-$ npm run test
+`$ npm run start:dev` - this will run the app and watch for changes :)
 
-# e2e tests
-$ npm run test:e2e
+## Updating the database
 
-# test coverage
-$ npm run test:cov
-```
+To update the database, you will need to create a migration. To do so, run:
 
-## Support
+`$ npm run typeorm -- migration:generate -n MessageForTheMigration`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
