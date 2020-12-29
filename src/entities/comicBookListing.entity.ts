@@ -75,7 +75,7 @@ export class AuctionTimePoint extends BaseEntity {
     @Column({type: "float"})
     public currentBid: number;
 
-    @Column({type: "float"})
+    @Column({type: "float", nullable: true})
     public nextBid: number;
 
     @CreateDateColumn()

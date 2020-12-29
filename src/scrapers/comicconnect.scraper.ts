@@ -144,7 +144,8 @@ export class ComicconnectScraper implements IScraper {
                 } else {
                     timePoint = new AuctionTimePoint();
                     timePoint.currentBid = parseFloat($(child).find('.val').text().substr(1));
-                    timePoint.nextBid = parseFloat($(child).find('.minbidvalue').text().substr(1));
+                    const minBidValue = parseFloat($(child).find('.minbidvalue').text().substr(1));
+                    timePoint.nextBid = isNaN(minBidValue) ? null : minBidValue;
                     listing.listingEndsInSeconds = parseInt($(child).find('.countdown-container').attr('data-countdown-ends')) / 1000;
                     listing.type = ListingType.Auction;
                 }
@@ -153,6 +154,7 @@ export class ComicconnectScraper implements IScraper {
                 await timePoint.save();
                 await listing.save();
             } catch (e) {
+                console.warn(e);
                 console.warn("Failed to save page: " + page);
             }
         });
