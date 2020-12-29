@@ -19,8 +19,7 @@ To run the app locally, you will need 2 requirements. Here are some basic instal
   - Next, you will want to create a database for Nerd Arbitrage and a user to access it.
   - `$ mysql` - open up a mysql client in the shell
   - `mysql> CREATE DATABASE nerd_arbitrage;` - create a new database. Note: nerd-arbitrage can be whatever you want.
-  - `mysql> CREATE USER '[username]'@'localhost' IDENTIFIED WITH mysql_native_password BY '[password]';` - create a new user. Replace [username], [password] with the desired username and password.
-  - `mysql> GRANT ALL PRIVILEGES ON nerd_arbitrage.* to '[username]'@'localhost';` - grant all privileges for nerd-arbitrage database to the new user.
+  - `mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY [password];` - replace password with what you chose from mysql_secure_installation.
   - `mysql> FLUSH PRIVILEGES;` - make the privileges take affect.
   - `mysql> exit; ` - exit the mysql client
   - `$ exit` - exit the sudo user
@@ -49,16 +48,16 @@ Copy and paste the following into the env file:
 DB_TYPE=mysql
 DB_HOST=localhost
 DB_PORT=3306
-DB_USER=[username] # Replace me with the proper username
-DB_PASS=[password] # Replace me with the proper password
-DB_NAME=nerd-arbitrage
+DB_USER=[username] # Replace me with the root db username
+DB_PASS=[password] # Replace me with the root db password
+DB_NAME=nerd_arbitrage
 
 APP_PORT=4200
 ```
 
 Finally, run the database migrations to create the tables for the app
 
-`$ npm run typeorm -- migration:run`
+`$ npm run build && npm run typeorm -- migration:run`
 
 
 ## Running the App
