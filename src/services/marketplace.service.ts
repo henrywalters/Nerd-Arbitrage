@@ -1,4 +1,5 @@
 import {Injectable} from "@nestjs/common";
+import { EbayScraper } from "src/scrapers/ebay.scraper";
 import {IScraper} from "../interfaces/iscraper";
 import {ComicconnectScraper} from "../scrapers/comicconnect.scraper";
 
@@ -9,6 +10,7 @@ export class MarketplaceService {
     constructor() {
         this.scrapers = [
             new ComicconnectScraper(),
+            new EbayScraper(),
         ];
     }
 

@@ -102,11 +102,14 @@ export class ComicconnectScraper implements IScraper {
                 const parsedCondition = this.ParseCondition(rawCondition);
 
                 let comic = await ComicBook.SearchOne(parsedTitle.title, parsedTitle.issue, parsedTitle.volume);
+                console.log(parsedTitle);
+                console.log(comic);
 
                 let listing = await ComicBookListing.SearchOne("comicconnect", listingId);
                 let timePoint: AuctionTimePoint | ForSaleTimePoint;
 
                 if (!comic) {
+                    console.log("CREATING NEW RECORD");
                     comic = new ComicBook();
                     comic.title = parsedTitle.title;
                     comic.issue = parsedTitle.issue;
