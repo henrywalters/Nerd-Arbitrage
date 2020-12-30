@@ -19,6 +19,9 @@ export class ComicBook extends BaseEntity {
     public title: string;
 
     @Column({nullable: true})
+    public imageUrl?: string;
+
+    @Column({nullable: true})
     public variant?: string;
 
     @Column({nullable: true})

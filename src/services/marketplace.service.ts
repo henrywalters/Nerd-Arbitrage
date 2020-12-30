@@ -9,8 +9,8 @@ export class MarketplaceService {
 
     constructor() {
         this.scrapers = [
-            new ComicconnectScraper(),
             new EbayScraper(),
+            new ComicconnectScraper(),
         ];
     }
 
