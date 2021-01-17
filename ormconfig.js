@@ -13,6 +13,9 @@ const Config = [
         entities: [ "dist/entities/**/*.entity{.ts,.js}" ],
         logging: false,
         synchronize: false,
+        extra: {
+            charset: "utf8mb4_unicode_ci",
+        }
     },
     {
         name: "cli",

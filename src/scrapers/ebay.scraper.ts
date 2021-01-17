@@ -135,7 +135,6 @@ export class EbayScraper implements IScraper {
             parsed.title = title.split(issueRegex)[0].trim();
             title = title.replace(issueRegex, '');
         }
-        console.log(issue);
 
         const condition = title.match(conditionRegex);
         if (condition) {
@@ -164,7 +163,9 @@ export class EbayScraper implements IScraper {
                 limit: 1,
             }));
 
-            const total = parseInt(initialSearch.total);
+            console.log(initialSearch);
+
+            const total = Math.min(parseInt(initialSearch.total), 10000);
 
             console.log("Total comic books: " + total);
 
@@ -182,9 +183,13 @@ export class EbayScraper implements IScraper {
 
                 for (const listing of listings) {
                     const parsed = this.parseTitle(listing.title);
-                    if (parsed.title !== '' && parsed.issue && parsed.volume) {
-                        const comic = await ComicBook.SearchOne(parsed.title, parsed.issue, parsed.volume);
+                    if (parsed.title !== '' && parsed.issue && parsed.volume && parsed.condition) {
+                        console.log(parsed);
+                        let comic = await ComicBook.SearchOne(parsed.title, parsed.issue, parsed.volume);
                         console.log(comic);
+                        if (!comic) {
+                            
+                        }
                     }
                 }
             }
